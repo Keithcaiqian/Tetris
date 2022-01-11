@@ -5,7 +5,7 @@ export class Square{
         x: 0,
         y: 0,
     }
-    private _color: String = ''
+    private _color: string = ''
 
     //属性：显示者
     private _viewer?: IViewer
@@ -16,6 +16,9 @@ export class Square{
 
     public set viewer(v) {
         this._viewer = v;
+        if (v) {
+            v.show();
+        }
     }
 
     public set point(val:Point) {
@@ -30,7 +33,7 @@ export class Square{
         return this._point;
     }
 
-    public set color(val:String){
+    public set color(val:string){
         this._color = val;
     }
     public get color(){
