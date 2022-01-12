@@ -1,24 +1,33 @@
-import { Square } from "./core/Square";
 import $ from 'jquery';
 import { SquarePageViewer } from "./core/viewer/SquarePageViewer";
+import { createTeris } from "./core/Teris";
 
+const sqGroup = createTeris({x:3,y:3});
+sqGroup.squareGroup.forEach(s => {
+    s.viewer = new SquarePageViewer(s,$('#root'));
+})
 
-const sq = new Square();
-sq.viewer = new SquarePageViewer(sq,$('#root'));
-sq.color = '#f40'
-sq.point = {
-    x: 3,
-    y: 4
-}
-$('#move').on('click',function(){
-    sq.point = {
-        x: 3,
-        y: sq.point.y + 1
+$('#btnDown').on('click',function(){
+    sqGroup.centerPoint = {
+        x: sqGroup.centerPoint.x,
+        y: sqGroup.centerPoint.y + 1,
     }
 })
-$('#delete').on('click',function(){
-    sq.viewer?.remove();
-});
-$('#add').on('click',function(){
-    sq.viewer = new SquarePageViewer(sq, $("#root"));
-});
+$('#btnRight').on('click',function(){
+    sqGroup.centerPoint = {
+        x: sqGroup.centerPoint.x + 1,
+        y: sqGroup.centerPoint.y,
+    }
+})
+$('#btnLeft').on('click',function(){
+    sqGroup.centerPoint = {
+        x: sqGroup.centerPoint.x - 1,
+        y: sqGroup.centerPoint.y,
+    }
+})
+$('#btnUp').on('click',function(){
+    sqGroup.centerPoint = {
+        x: sqGroup.centerPoint.x,
+        y: sqGroup.centerPoint.y - 1,
+    }
+})
