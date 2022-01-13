@@ -1,6 +1,6 @@
 export default {
     Square:{
-        width: 20,
-        height: 20
+        width: 40,
+        height: 40
     }
 }

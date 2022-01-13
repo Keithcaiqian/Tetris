@@ -1,33 +1,26 @@
 import $ from 'jquery';
 import { SquarePageViewer } from "./core/viewer/SquarePageViewer";
 import { createTeris } from "./core/Teris";
+import { TerisRules } from './core/TerisRules';
+import { MoveDirection } from './core/types';
 
-const sqGroup = createTeris({x:3,y:3});
-sqGroup.squareGroup.forEach(s => {
+const teris = createTeris({x:3,y:3});
+teris.squareGroup.forEach(s => {
     s.viewer = new SquarePageViewer(s,$('#root'));
 })
 
 $('#btnDown').on('click',function(){
-    sqGroup.centerPoint = {
-        x: sqGroup.centerPoint.x,
-        y: sqGroup.centerPoint.y + 1,
-    }
+    TerisRules.move(teris,MoveDirection.down)
 })
 $('#btnRight').on('click',function(){
-    sqGroup.centerPoint = {
-        x: sqGroup.centerPoint.x + 1,
-        y: sqGroup.centerPoint.y,
-    }
+    TerisRules.moveDirectly(teris,MoveDirection.right)
 })
 $('#btnLeft').on('click',function(){
-    sqGroup.centerPoint = {
-        x: sqGroup.centerPoint.x - 1,
-        y: sqGroup.centerPoint.y,
-    }
+    TerisRules.move(teris,MoveDirection.left)
 })
 $('#btnUp').on('click',function(){
-    sqGroup.centerPoint = {
-        x: sqGroup.centerPoint.x,
-        y: sqGroup.centerPoint.y - 1,
-    }
+    TerisRules.move(teris,{
+        x: teris.centerPoint.x,
+        y: teris.centerPoint.y - 1,
+    })
 })

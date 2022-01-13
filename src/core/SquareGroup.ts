@@ -8,6 +8,10 @@ export class SquareGroup {
         return this._squareGroup;
     }
 
+    public get shape(){
+        return this._shape
+    }
+
     public get centerPoint(){
         return this._centerPoint;
     }
@@ -17,19 +21,19 @@ export class SquareGroup {
         // 改变每个方块的坐标
         this._squareGroup.forEach((s,i) => {
             s.point = {
-                x: this._pointArr[i].x + this._centerPoint.x,
-                y: this._pointArr[i].y + this._centerPoint.y
+                x: this._shape[i].x + this._centerPoint.x,
+                y: this._shape[i].y + this._centerPoint.y
             }
         })
     }
 
     constructor(
-        private _pointArr: Shape,
+        private _shape: Shape,
         private _centerPoint: Point,
         private _color: string
     ){
         const arr:Square[] = [];
-        this._pointArr.forEach(p => {
+        this._shape.forEach(p => {
             const sq = new Square();
             sq.point = {
                 x: p.x + this._centerPoint.x,

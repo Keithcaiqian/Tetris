@@ -22,7 +22,15 @@ module.exports = {
   module: {
     rules: [
       // all files with a `.ts` or `.tsx` extension will be handled by `ts-loader`
-      { test: /\.tsx?$/, loader: "ts-loader" }
+      { 
+        test: /\.tsx?$/, 
+        use: {
+          loader: "ts-loader",
+          options: {
+              transpileOnly:true
+          }
+        } 
+      }
     ]
   }
 };
