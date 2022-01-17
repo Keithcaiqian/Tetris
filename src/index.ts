@@ -12,15 +12,18 @@ teris.squareGroup.forEach(s => {
 $('#btnDown').on('click',function(){
     TerisRules.move(teris,MoveDirection.down)
 })
-$('#btnRight').on('click',function(){
-    TerisRules.moveDirectly(teris,MoveDirection.right)
-})
 $('#btnLeft').on('click',function(){
     TerisRules.move(teris,MoveDirection.left)
+})
+$('#btnRight').on('click',function(){
+    TerisRules.move(teris,MoveDirection.right)
 })
 $('#btnUp').on('click',function(){
     TerisRules.move(teris,{
         x: teris.centerPoint.x,
         y: teris.centerPoint.y - 1,
     })
+})
+$('#btnRotate').on('click',function(){
+    TerisRules.rotate(teris);
 })

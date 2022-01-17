@@ -2,7 +2,7 @@ import { Square } from "./Square";
 import { Point, Shape } from "./types";
 
 export class SquareGroup {
-    private readonly _squareGroup: Square[];
+    private readonly _squareGroup: Square[]; //小方块数组
 
     public get squareGroup(){
         return this._squareGroup;
@@ -19,6 +19,11 @@ export class SquareGroup {
     public set centerPoint(val: Point){
         this._centerPoint = val;
         // 改变每个方块的坐标
+        this.changeEachSquarePoint();
+    }
+
+    // 改变每个小方块的坐标
+    private changeEachSquarePoint(){
         this._squareGroup.forEach((s,i) => {
             s.point = {
                 x: this._shape[i].x + this._centerPoint.x,
@@ -43,5 +48,41 @@ export class SquareGroup {
             arr.push(sq);
         })
         this._squareGroup = arr;
+    }
+
+    //是否顺时针旋转 
+    protected isClock = true;
+
+    /**
+     * 旋转后的坐标
+     */
+    public afterRotatePoint():Shape{
+        let point: Shape;
+        // 顺时针
+        if(this.isClock){
+            point = this._shape.map(p => {
+                return {
+                    x: p.y,
+                    y: -p.x
+                }
+            })
+        }
+        // 逆时针
+        else{
+            point = this._shape.map(p => {
+                return {
+                    x: -p.y,
+                    y: p.x
+                }
+            })
+        }
+
+        return point;
+    }
+
+    // 旋转
+    public rotate(){
+        this._shape = this.afterRotatePoint();
+        this.changeEachSquarePoint();
     }
 }

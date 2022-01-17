@@ -78,4 +78,17 @@ function isPoint(obj: any): obj is Point {
             
         }
     }
+
+    /**
+     * 旋转
+     */
+    static rotate(teris: SquareGroup){
+        const newShape = teris.afterRotatePoint();
+        if(this.canIMove(newShape,teris.centerPoint)){
+            teris.rotate();
+            return true;
+        }else{
+            return false;
+        }
+    }
  }
